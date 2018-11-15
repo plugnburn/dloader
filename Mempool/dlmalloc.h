@@ -17,17 +17,17 @@
 */
 
 #ifndef _DLMALLOC_H__
-#define _DLMALLOC_H__
+#      define _DLMALLOC_H__
 
 /* for size_t definition */
-#include <stddef.h>
+#      include <stddef.h>
 
 //lint ++flb
 
-extern "C" void* dlmalloc(size_t);
-extern "C" void  dlfree(void *);
-extern "C" void* dlcalloc(size_t, size_t);
-extern "C" void* dlrealloc(void*, size_t);
+extern "C" void *dlmalloc (size_t);
+extern "C" void dlfree (void *);
+extern "C" void *dlcalloc (size_t, size_t);
+extern "C" void *dlrealloc (void *, size_t);
 
 //lint --flb
 

@@ -1632,6 +1632,12 @@ void CDLoader::SetReplaceDLFiles(std::map<std::string,std::string>& mapReplaceDL
 	m_Settings.SetReplaceDLFiles(mapReplaceDLFile);
 }
 
+BOOL CDLoader::LoadFlashDir(std::map<std::string,std::string>& mapReplaceDLFile)
+{
+	m_Settings.LoadFlashDir(mapReplaceDLFile);
+	return TRUE;
+}
+
 BOOL CDLoader::LoadPacket(const char *szPac)
 {
 	if(!m_Settings.LoadPacket(szPac))

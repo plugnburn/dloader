@@ -142,6 +142,14 @@ PPRODUCT_INFO_T CXmlConfigParse::GetProdInfo(LPCTSTR lpszProductName)
 
     PRODUCT_MAP::iterator it;
 
+	if (0 == strcmp(lpszProductName, "IMAGEMODUE")) {
+		for(it = m_mapProductInfo.begin(); it != m_mapProductInfo.end(); it++)
+		{
+			m_pCurProduct = it->second;
+			return m_pCurProduct;
+		}
+	}
+
     it = m_mapProductInfo.find(lpszProductName);
 
 	if(it == m_mapProductInfo.end())

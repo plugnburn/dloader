@@ -14,102 +14,121 @@
 ******************************************************************************/
 
 #ifndef _BOOTMODEOBJ_H
-#define	_BOOTMODEOBJ_H
+#      define	_BOOTMODEOBJ_H
 
 
 /**---------------------------------------------------------------------------*
 **                         Dependencies                                      *
 **---------------------------------------------------------------------------*/
-#include "Global.h"
-#include "BMFileImpl.h"
-#include "ICommChannel.h"
-#include "BootModeIntegOpr.h"
-#include "BootModeitf.h"
-#include <map>
-#include <pthread.h>
+#      include "Global.h"
+#      include "BMFileImpl.h"
+#      include "ICommChannel.h"
+#      include "BootModeIntegOpr.h"
+#      include "BootModeitf.h"
+#      include <map>
+#      include <pthread.h>
 
 
 class CBootModeObj
 {
-public:
-    CBootModeObj();
-    virtual ~CBootModeObj();
+	public:
+	  CBootModeObj ();
+	  virtual ~ CBootModeObj ();
 
-public:
-    STDMETHOD(SetWaitTimeForNextChip)(/*[in]*/ DWORD dwWaitTime = CHANGE_CHIP_TIMEOUT );
+	public:
+	  STDMETHOD (SetWaitTimeForNextChip) ( /*[in] */ DWORD dwWaitTime =
+					      CHANGE_CHIP_TIMEOUT);
 
-    STDMETHOD(StopBootModeOperation)();
+	  STDMETHOD (StopBootModeOperation) ();
 
-    STDMETHOD(StartBootModeOperation)(
-        /*[in]*/ void* lpBMFileInfo,
-        /*[in]*/ UINT uFileCount,
-        /*[in]*/ void* pOpenArgument,
-        /*[in]*/ BOOL bBigEndian,
-        /*[in]*/ DWORD dwOprCookie,
-        /*[in]*/ void* pReceiver);
+	  STDMETHOD (StartBootModeOperation) (
+						       /*[in] */ void
+						       *lpBMFileInfo,
+						       /*[in] */
+						       UINT uFileCount,
+						       /*[in] */
+						       void *pOpenArgument,
+						       /*[in] */
+						       BOOL bBigEndian,
+						       /*[in] */
+						       DWORD dwOprCookie,
+						       /*[in] */
+						       void *pReceiver);
 
-    STDMETHOD( SetCommunicateChannelPtr)( /*[in]*/LPVOID pCommunicateChannel );
+	  STDMETHOD (SetCommunicateChannelPtr) ( /*[in] */ LPVOID
+						pCommunicateChannel);
 
-    STDMETHOD( GetCommunicateChannelPtr)( /*[out]*/LPVOID* ppCommunicateChannel );
+	  STDMETHOD (GetCommunicateChannelPtr) ( /*[out] */ LPVOID *
+						ppCommunicateChannel);
 
-    //IBMOprSubscriber
-    STDMETHOD(SubscribeOperationObserver) (IBMOprObserver* pSink,
-        ULONG uFlags,
-        DWORD* lpdwCookie );
+	  //IBMOprSubscriber
+	  STDMETHOD (SubscribeOperationObserver) (IBMOprObserver * pSink,
+						  ULONG uFlags,
+						  DWORD * lpdwCookie);
 
-    STDMETHOD(UnsubscribeOperationObserver) (DWORD dwCookie);
+	  STDMETHOD (UnsubscribeOperationObserver) (DWORD dwCookie);
 
-    //IBMOprBuffer
-    STDMETHOD_(const LPBYTE, GetReadBuffer) ( ) ;
+	  //IBMOprBuffer
+	  STDMETHOD_ (const LPBYTE, GetReadBuffer) ();
 
-    STDMETHOD_( DWORD, GetReadBufferSize) ( );
+	    STDMETHOD_ (DWORD, GetReadBufferSize) ();
 
-     STDMETHOD_(void, EnablePortSecondEnum)(BOOL bEnable);
+	    STDMETHOD_ (void, EnablePortSecondEnum) (BOOL bEnable);
 
-protected:
+	protected:
 
-    static void* GetBMThreadFunc(void* lpParam);
-    void* BMThreadFunc();
+	  static void *GetBMThreadFunc (void *lpParam);
+	  void *BMThreadFunc ();
 
-    BOOL CreateBMThread();
-    void DestroyBMThread();
+	  BOOL CreateBMThread ();
+	  void DestroyBMThread ();
 
-    BOOL GenerateStartOprNotification( DWORD dwOprCookie, LPCTSTR lpszFileId, LPCTSTR lpszFileType,
-                            LPCTSTR lpszOperationType );
+	  BOOL GenerateStartOprNotification (DWORD dwOprCookie,
+					     LPCTSTR lpszFileId,
+					     LPCTSTR lpszFileType,
+					     LPCTSTR lpszOperationType);
 
-    BOOL GenerateEndOprNotification( DWORD dwOprCookie,LPCTSTR lpszFileId, LPCTSTR lpszFileType,
-                            LPCTSTR lpszOperationType, DWORD dwResult  );
+	  BOOL GenerateEndOprNotification (DWORD dwOprCookie,
+					   LPCTSTR lpszFileId,
+					   LPCTSTR lpszFileType,
+					   LPCTSTR lpszOperationType,
+					   DWORD dwResult);
 
-    BOOL GenerateStartFileOprNotification( DWORD dwOprCookie, LPCTSTR lpszFileId, LPCTSTR lpszFileType );
+	  BOOL GenerateStartFileOprNotification (DWORD dwOprCookie,
+						 LPCTSTR lpszFileId,
+						 LPCTSTR lpszFileType);
 
-    BOOL GenerateEndFileOprNotification( DWORD dwOprCookie, LPCTSTR lpszFileId, LPCTSTR lpszFileType, DWORD dwResult );
+	  BOOL GenerateEndFileOprNotification (DWORD dwOprCookie,
+					       LPCTSTR lpszFileId,
+					       LPCTSTR lpszFileType,
+					       DWORD dwResult);
 
-    BOOL GenerateStartNotification( DWORD dwOprCookie , DWORD dwResult );
+	  BOOL GenerateStartNotification (DWORD dwOprCookie, DWORD dwResult);
 
-    BOOL GenerateEndNotification( DWORD dwOprCookie , DWORD dwResult );
+	  BOOL GenerateEndNotification (DWORD dwOprCookie, DWORD dwResult);
 
-    void EndProc( BOOL bEndSuccess );
+	  void EndProc (BOOL bEndSuccess);
 
-    void Log( LPCTSTR lpszLog );
+	  void Log (LPCTSTR lpszLog);
 
-    //int EnumKeys(char* pSection,CStringArray* pKeys);
+	  //int EnumKeys(char* pSection,CStringArray* pKeys);
 
-private:
+	private:
 //    COleDispatchDriver  m_OprDriver;
-	CBootModeIntegOpr   m_OprDriver;
+	    CBootModeIntegOpr m_OprDriver;
 
-    pthread_t           m_hBMThread;
-    BOOL                m_bExitThread;
+	  pthread_t m_hBMThread;
+	  BOOL m_bExitThread;
 
-    CBMFileImpl         m_BMFileImpl;
+	  CBMFileImpl m_BMFileImpl;
 
-    DWORD               m_dwOprCookie;
+	  DWORD m_dwOprCookie;
 
-    DWORD               m_dwWaitTime;
+	  DWORD m_dwWaitTime;
 
-    std::map<DWORD,IBMOprObserver*> m_mapObserverRegs;
+	    std::map < DWORD, IBMOprObserver * >m_mapObserverRegs;
 
-    DWORD               m_dwNextObserverCookie;
-    pthread_mutex_t     m_CS;
+	  DWORD m_dwNextObserverCookie;
+	  pthread_mutex_t m_CS;
 };
 #endif // _BOOTMODEOBJ_H
