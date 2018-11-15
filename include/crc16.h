@@ -1,5 +1,5 @@
 #ifndef _CRC16_H__
-#define _CRC16_H__
+#      define _CRC16_H__
 
 /**
  * crc16 - compute the CRC-16 for the data buffer
@@ -9,10 +9,9 @@
  *
  * Returns the updated CRC value.
  */
- 
-unsigned short crc16(unsigned short crc, 
-                     unsigned char const *buffer,
-                     unsigned int len);
+
+unsigned short crc16 (unsigned short crc,
+		      unsigned char const *buffer, unsigned int len);
 
 
 #endif // _CRC16_H__

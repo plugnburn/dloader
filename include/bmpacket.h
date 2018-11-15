@@ -18,25 +18,21 @@
 **---------------------------------------------------------------------------*/
 
 #ifndef _BMDATAPACKET_H
-#define	_BMDATAPACKET_H
+#      define	_BMDATAPACKET_H
 
-#define PART_PACKET     2
-#define GOOD_PACKET     1
-#define ERROR_PACKET    0 
+#      define PART_PACKET     2
+#      define GOOD_PACKET     1
+#      define ERROR_PACKET    0
 
-int decode_bmmsg( unsigned char* lpSrcMsg, 
-    int nSrcMsgLen,
-    unsigned char** lppDestMsg,
-    int *pnDestMsg ,
-    int bCrc );
+int decode_bmmsg (unsigned char *lpSrcMsg,
+		  int nSrcMsgLen,
+		  unsigned char **lppDestMsg, int *pnDestMsg, int bCrc);
 
-int encode_bmmsg(  unsigned char* lpSrcMsg, 
-    int nSrcMsgLen,
-    unsigned char** lppDestMsg,
-    int *pnDestMsg,
-    int bCrc );
+int encode_bmmsg (unsigned char *lpSrcMsg,
+		  int nSrcMsgLen,
+		  unsigned char **lppDestMsg, int *pnDestMsg, int bCrc);
 
 
-int  GetVerifyType(char* buf_ptr,unsigned int len);
+int GetVerifyType (char *buf_ptr, unsigned int len);
 
 #endif // _LOGELSIDEDPS_H

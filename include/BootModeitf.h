@@ -1,17 +1,17 @@
 #ifndef _BOOTMODEITF_H__
-#define _BOOTMODEITF_H__
+#      define _BOOTMODEITF_H__
 
-#include "typedef.h"
-#include "Global.h"
+#      include "typedef.h"
+#      include "Global.h"
 
 
-#define STDMETHOD(x) virtual ULONG x
-#define STDMETHOD_(t,x) virtual t x
-#define PURE =0
-#define FAILED(x)  (x)!=0
-#define SUCCEEDED(x)  (x)==0
-#define STDMETHODIMP ULONG
-#define STDMETHODIMP_(t) t
+#      define STDMETHOD(x) virtual ULONG x
+#      define STDMETHOD_(t,x) virtual t x
+#      define PURE =0
+#      define FAILED(x)  (x)!=0
+#      define SUCCEEDED(x)  (x)==0
+#      define STDMETHODIMP ULONG
+#      define STDMETHODIMP_(t) t
 
 class IBMOprObserver;
 /**
@@ -21,9 +21,9 @@ class IBMOprObserver;
  */
 class IBootModeHandler
 {
-public:
-     IBootModeHandler();
-     virtual ~IBootModeHandler() = 0;
+	public:
+	  IBootModeHandler ();
+	  virtual ~ IBootModeHandler () = 0;
 
     /**
      * Start the operation at boot mode
@@ -38,19 +38,19 @@ public:
      *
      * @return Returns S_OK if successful,Otherwise returns S_FAIL;
      */
-    STDMETHOD(StartBootModeOperation)(  /*[in]*/ void* lpDLFileInfo,
-				        /*[in]*/ UINT uFileCount,
-				        /*[in]*/ void* pOpenArgument,
-				        /*[in]*/ BOOL bBigEndian,
-		                /*[in]*/ DWORD dwOprCookie,
-		                /*[in]*/ void* pReceiver ) PURE;
+	  STDMETHOD (StartBootModeOperation) ( /*[in] */ void *lpDLFileInfo,
+					      /*[in] */ UINT uFileCount,
+					      /*[in] */ void *pOpenArgument,
+					      /*[in] */ BOOL bBigEndian,
+					      /*[in] */ DWORD dwOprCookie,
+					      /*[in] */ void *pReceiver) PURE;
 
     /**
      * Stop the operation at boot mode
      *
      * @return Returns S_OK if successful,Otherwise returns S_FAIL;
      */
-    STDMETHOD(StopBootModeOperation)() PURE;
+	  STDMETHOD (StopBootModeOperation) () PURE;
 
     /**
      * In factory, when the current chip have finished, it'll wait for next chip
@@ -59,7 +59,8 @@ public:
      *
      * @return Returns S_OK if successful,Otherwise returns S_FAIL;
      */
-    STDMETHOD(SetWaitTimeForNextChip)(/*[in]*/ DWORD dwWaitTime) PURE;
+	  STDMETHOD (SetWaitTimeForNextChip) ( /*[in] */ DWORD dwWaitTime)
+	  PURE;
 
     /**
      * Set the communication channel pointer
@@ -68,7 +69,8 @@ public:
      *
      * @return The return value is ignored.
      */
-    STDMETHOD( SetCommunicateChannelPtr)( /*[in]*/LPVOID pCommunicateChannel )PURE;
+	  STDMETHOD (SetCommunicateChannelPtr) ( /*[in] */ LPVOID
+						pCommunicateChannel) PURE;
 
     /**
      * get the communication channel pointer
@@ -77,7 +79,8 @@ public:
      *
      * @return Returns S_OK if successful,Otherwise returns S_FAIL;
      */
-    STDMETHOD( GetCommunicateChannelPtr)( /*[out]*/LPVOID* ppCommunicateChannel )PURE;
+	  STDMETHOD (GetCommunicateChannelPtr) ( /*[out] */ LPVOID *
+						ppCommunicateChannel) PURE;
 
 	/**
 	 * Subscribe an observer object to receive notification .
@@ -90,9 +93,9 @@ public:
 	 *
      * @return Returns S_OK if successful,Otherwise returns S_FAIL;
      */
-    STDMETHOD(SubscribeOperationObserver) (IBMOprObserver* pSink,
-					ULONG uFlags,
-					DWORD* lpdwCookie ) PURE;
+	  STDMETHOD (SubscribeOperationObserver) (IBMOprObserver * pSink,
+						  ULONG uFlags,
+						  DWORD * lpdwCookie) PURE;
 
 	/**
 	 * Unsubscribe an observer object subscribed previously with SubscribeOperationObserver().
@@ -101,30 +104,30 @@ public:
 	 *
      * @return Returns S_OK if successful,Otherwise returns S_FAIL;
      */
-    STDMETHOD(UnsubscribeOperationObserver) (DWORD dwCookie) PURE;
+	  STDMETHOD (UnsubscribeOperationObserver) (DWORD dwCookie) PURE;
 
-    	/**
+	/**
 	 * Get the read buffer from boot mode platform.
 	 *
      * @return : point to the read buffer.
      */
-    STDMETHOD_(const LPBYTE, GetReadBuffer) ( ) PURE;
+	  STDMETHOD_ (const LPBYTE, GetReadBuffer) () PURE;
 
     /**
 	 * Get the read buffer from boot mode platform.
      *
      * @return : read buffer size
      */
-    STDMETHOD_( DWORD, GetReadBufferSize) ( ) PURE;
+	    STDMETHOD_ (DWORD, GetReadBufferSize) () PURE;
 
-    	/**
+	/**
 	 * Set retry times of CheckBaud operation.
 	 *
      * @param dwTimes   Retry times,0 means infinite
      *
      * @return Returns S_OK if successful,Otherwise returns S_FAIL;
      */
-    STDMETHOD( SetCheckBaudTimes ) ( DWORD dwTimes ) PURE;
+	    STDMETHOD (SetCheckBaudTimes) (DWORD dwTimes) PURE;
 
     /**
 	 * Set repartition strategy flag
@@ -133,7 +136,7 @@ public:
      *
      * @return Returns S_OK if successful,Otherwise returns S_FAIL;
      */
-    STDMETHOD( SetRepartitionFlag ) ( DWORD dwFlag ) PURE;
+	    STDMETHOD (SetRepartitionFlag) (DWORD dwFlag) PURE;
 
 	/**
 	 * Set read flash before repartition flag
@@ -142,7 +145,7 @@ public:
      *
      * @return Returns S_OK if successful,Otherwise returns S_FAIL;
      */
-    STDMETHOD( SetReadFlashBefRepFlag ) ( DWORD dwFlag ) PURE;
+	    STDMETHOD (SetReadFlashBefRepFlag) (DWORD dwFlag) PURE;
 
     /**
 	 * Get packet length of file type
@@ -151,7 +154,8 @@ public:
      *
      * @return Returns packet length;
      */
-    STDMETHOD_( DWORD, GetPacketLength ) ( const char* bstrFileType ) PURE;
+	    STDMETHOD_ (DWORD,
+			GetPacketLength) (const char *bstrFileType) PURE;
 
 	/**
      * Get a property value of.
@@ -169,7 +173,8 @@ public:
      *
      * @return Returns BM_S_OK if successful,Otherwise returns S_FAIL;
      */
-     STDMETHOD( GetProperty )( LONG  lFlags, const char* cbstrName,  void *  pvarValue ) PURE;
+	    STDMETHOD (GetProperty) (LONG lFlags, const char *cbstrName,
+				     void *pvarValue) PURE;
 
     /**
      * Put a property value.
@@ -184,16 +189,17 @@ public:
      *
      * @return Returns S_OK if successful,Otherwise returns S_FAIL;
      */
-     STDMETHOD( SetProperty )( LONG lFlags, const char* cbstrName,  const void * pcvarValue ) PURE;
+	    STDMETHOD (SetProperty) (LONG lFlags, const char *cbstrName,
+				     const void *pcvarValue) PURE;
 
 };
 
 
 class IBMOprObserver
 {
-public:
-     IBMOprObserver();
-     virtual ~IBMOprObserver() = 0;
+	public:
+	  IBMOprObserver ();
+	  virtual ~ IBMOprObserver () = 0;
    /**
     * Invoked when start work at boot mode platform.
     *
@@ -203,8 +209,7 @@ public:
     *
     * @return The return value is ignored.
     */
-    STDMETHOD(OnStart)(  DWORD dwOprCookie,
-		                 DWORD dwResult ) PURE;
+	  STDMETHOD (OnStart) (DWORD dwOprCookie, DWORD dwResult) PURE;
 
     /**
     * Invoked when end work at boot mode platform.
@@ -215,8 +220,7 @@ public:
     *
     * @return The return value is ignored.
     */
-    STDMETHOD(OnEnd)(  DWORD dwOprCookie,
-		               DWORD dwResult ) PURE;
+	  STDMETHOD (OnEnd) (DWORD dwOprCookie, DWORD dwResult) PURE;
 
     /**
     * Invoked when start some operation at boot mode platform.
@@ -233,11 +237,11 @@ public:
     *
     * @return The return value is ignored.
     */
-    STDMETHOD(OnOperationStart)(  DWORD dwOprCookie,
-								  const char* cbstrFileID,
-		                          const char* cbstrFileType,
-    				              const char* cbstrOperationType,
-                                  void * pBMFileInterface ) PURE;
+	  STDMETHOD (OnOperationStart) (DWORD dwOprCookie,
+					const char *cbstrFileID,
+					const char *cbstrFileType,
+					const char *cbstrOperationType,
+					void *pBMFileInterface) PURE;
 
     /**
     * Invoked when end some operation at boot mode platform.
@@ -256,12 +260,12 @@ public:
     *
     * @return Returns S_OK if successful,Otherwise returns S_FAIL;
     */
-    STDMETHOD(OnOperationEnd)(  DWORD dwOprCookie,
-								const char* cbstrFileID,
-								const char* cbstrFileType,
-    							const char* cbstrOperationType,
-								DWORD dwResult,
-								void* pBMFileInterface ) PURE;
+	  STDMETHOD (OnOperationEnd) (DWORD dwOprCookie,
+				      const char *cbstrFileID,
+				      const char *cbstrFileType,
+				      const char *cbstrOperationType,
+				      DWORD dwResult,
+				      void *pBMFileInterface) PURE;
 
     /**
     * Invoked when start some file operation at boot mode platform.
@@ -276,10 +280,10 @@ public:
     *
     * @return Returns S_OK if successful,Otherwise returns S_FAIL;
     */
-    STDMETHOD(OnFileOprStart)( DWORD dwOprCookie,
-							   const char* cbstrFileID,
-							   const char* cbstrFileType,
-                               void * pBMFileInterface )PURE;
+	  STDMETHOD (OnFileOprStart) (DWORD dwOprCookie,
+				      const char *cbstrFileID,
+				      const char *cbstrFileType,
+				      void *pBMFileInterface) PURE;
 
     /**
     * Invoked when end some file operation at boot mode platform.
@@ -292,10 +296,10 @@ public:
     *
     * @return Returns S_OK if successful,Otherwise returns S_FAIL;
     */
-    STDMETHOD(OnFileOprEnd)(    DWORD dwOprCookie,
-								const char* cbstrFileID,
-								const char* cbstrFileType,
-								DWORD dwResult )PURE;
+	  STDMETHOD (OnFileOprEnd) (DWORD dwOprCookie,
+				    const char *cbstrFileID,
+				    const char *cbstrFileType,
+				    DWORD dwResult) PURE;
 
 	/**
     * Invoked when prepare some file operation at boot mode application framework.
@@ -316,25 +320,25 @@ public:
     *
     * @return Returns S_OK if successful,Otherwise returns S_FAIL;
     */
-    STDMETHOD(OnFilePrepare)(DWORD dwOprCookie,
-							 const char* bstrProduct,
-							 const char* bstrFileName,
-							 void * lpFileInfo,
-							 /*[out]*/ void *    pBMFileInfoArr,
-							 /*[out]*/ DWORD*    lpBMFileInfoCount,
-							 /*[out]*/ DWORD*    lpdwFlag )PURE;
+	  STDMETHOD (OnFilePrepare) (DWORD dwOprCookie,
+				     const char *bstrProduct,
+				     const char *bstrFileName,
+				     void *lpFileInfo,
+				     /*[out] */ void *pBMFileInfoArr,
+				     /*[out] */ DWORD * lpBMFileInfoCount,
+				     /*[out] */ DWORD * lpdwFlag) PURE;
 };
 
 
 class IBMProcObserver
 {
-public:
-    IBMProcObserver();
-    virtual ~IBMProcObserver() = 0;
-    virtual int OnMessage(UINT msgID,UINT wParam, void* lParam)=0;
+	public:
+	  IBMProcObserver ();
+	  virtual ~ IBMProcObserver () = 0;
+	  virtual int OnMessage (UINT msgID, UINT wParam, void *lParam) = 0;
 };
 
-BOOL CreateBMObj(IBootModeHandler **pObj);
-BOOL DestroyBMObj(IBootModeHandler **pObj);
+BOOL CreateBMObj (IBootModeHandler ** pObj);
+BOOL DestroyBMObj (IBootModeHandler ** pObj);
 
 #endif //_BOOTMODEITF_H__

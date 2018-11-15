@@ -139,6 +139,9 @@ int main(int argc, char *argv[])
 	char   szSN[X_SN_LEN+1] 	= {0};
 	int i = 0;
 	std::map<std::string,std::string> mapReplaceDLFiles;
+	int ret;
+
+
     	if(argc>=2 &&_tcsicmp(argv[1],_T("version")) == 0)
 	{
 		printf(SZDLVERINFO);
@@ -262,7 +265,7 @@ int main(int argc, char *argv[])
 		}
 
 	}
-	if( 0 == strlen(szPac) || 0 != access(szPac, NULL) )
+	if( (0 == strlen(szPac) || 0 != access(szPac, NULL)) && mapReplaceDLFiles.size() == 0 )
 	{
         //printf("parameters error,Mustbe input pac file.\n");
         ShowUsage();
@@ -287,7 +290,13 @@ int main(int argc, char *argv[])
 	dl.SetSNString(szSN);
 	//char c;
 	printf("Init Downloading...\n");
-	if( dl.LoadPacket(szPac) )
+
+	if (0 != strlen(szPac) && 0 == access(szPac, NULL))
+		ret = dl.LoadPacket(szPac);
+	else if (mapReplaceDLFiles.size())
+		ret =  dl.LoadFlashDir(mapReplaceDLFiles);
+	
+	if(ret)
 	{
 		char c;
 		
@@ -414,7 +423,8 @@ int main(int argc, char *argv[])
 		}
   	}
 
-	dl.m_Settings.DelTmpDir();
+	if (0 != strlen(szPac) || 0 == access(szPac, NULL))
+		dl.m_Settings.DelTmpDir();
 	printf("\033[?25h"); //œ‘ æπ‚±Í
 	return nDownloadRet;
 }

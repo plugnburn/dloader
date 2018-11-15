@@ -107,6 +107,56 @@ void CSettings::SetReplaceDLFiles(std::map<std::string,std::string>& mapReplaceD
 
 }
 
+BOOL CSettings::LoadFlashDir(std::map<std::string,std::string>& mapReplaceDLFile)
+{
+	int fdl_check = FALSE;
+	std::string path;
+
+	if( 0 == mapReplaceDLFile.size() )
+	{
+		return FALSE;
+	}
+
+	std::map<std::string,std::string>::iterator it;
+	for(it = mapReplaceDLFile.begin(); it != mapReplaceDLFile.end(); it++)
+	{
+		std::string strID = it->first;
+		std::string strOrgFile = it->second;
+
+		if (-1 != strID.find("FDL")) {
+			fdl_check = TRUE;
+		}
+
+		path = strOrgFile;
+	}
+
+	path = path.substr(0, path.find_last_of("/"));
+
+	if (fdl_check == FALSE) {
+		std::string fdl_id("FDL");
+		std::string fdl_path = path + "/fdl.bin";
+		mapReplaceDLFile.insert(std::map<std::string,std::string>::value_type(fdl_id, fdl_path));
+	}
+
+
+	for(it = mapReplaceDLFile.begin(); it != mapReplaceDLFile.end(); it++)
+	{
+		std::string strID = it->first;
+		std::string strOrgFile = it->second;
+		m_mapDLFiles[strID] = (char*)strOrgFile.c_str();
+        m_mapDLState[strID] = 0;
+	}
+
+	m_strReleaseDir = path;
+	m_strSpecConfig = path + "/flash_patition.xml";
+
+	m_strCurProduct = "IMAGEMODUE";
+
+	return TRUE;
+}
+
+
+
 BOOL CSettings::LoadPacket(LPCTSTR pFileName)
 {
     CBinPack bp;

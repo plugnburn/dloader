@@ -29,8 +29,8 @@ COptionHelpper::COptionHelpper()
 	m_strBMFiletype.insert(0,"/");
 	m_strBMTimeout = m_strBMFiletype;
 
-	m_strBMFiletype += "BMFileType.ini";
-	m_strBMTimeout += "BMTimeout.ini";
+	m_strBMFiletype += "ini/BMFileType.ini";
+	m_strBMTimeout += "ini/BMTimeout.ini";
 	m_bEnableSecondEnum = FALSE;
 	m_bPowerOff = FALSE;
 

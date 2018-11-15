@@ -1029,7 +1029,7 @@ BOOL CBMAFImp::HasLog( void )
 
     GetExePath helper;
     std::string strPath = helper.getExeDir();
-    strPath += "BMTimeout.ini";
+    strPath += "ini/BMTimeout.ini";
     strPath.insert(0,"/");
     config = ini_config_create_from_file(strPath.c_str(),0);
     if(config == NULL)
