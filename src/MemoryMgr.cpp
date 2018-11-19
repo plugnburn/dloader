@@ -4,11 +4,7 @@
 
 //#include "stdafx.h"
 #include "MemoryMgr.h"
-#ifdef _WIN32
-#include ".\Mempool\dlmalloc.h"
-#else
-#include "../Mempool/dlmalloc.h"
-#endif
+#include "dlmalloc.h"
 
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
