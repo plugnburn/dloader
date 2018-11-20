@@ -1,6 +1,5 @@
-dloader 0.1
+dloader
 Copyright (C) 2018 Unisoc Technologies Inc.
-https://github.com/kelvincheung/cpuload
 
 WHAT IS THIS?
 =============
@@ -19,7 +18,6 @@ make
 sudo make install
 
 See the file INSTALL for compilation and installation instructions.
-
 
 USAGE
 =====
