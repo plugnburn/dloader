@@ -25,12 +25,13 @@ COptionHelpper::COptionHelpper()
 	m_bChangePacketLenSetting = FALSE;
 
 	GetExePath helper;
-	m_strBMFiletype = helper.getExeDir();
-	m_strBMFiletype.insert(0,"/");
+	/*m_strBMFiletype = helper.getExeDir();*/
+	/*m_strBMFiletype.insert(0,"/");*/
+	m_strBMFiletype = SYSCONFDIR "/";
 	m_strBMTimeout = m_strBMFiletype;
 
-	m_strBMFiletype += "ini/BMFileType.ini";
-	m_strBMTimeout += "ini/BMTimeout.ini";
+	m_strBMFiletype += "BMFileType.ini";
+	m_strBMTimeout += "BMTimeout.ini";
 	m_bEnableSecondEnum = FALSE;
 	m_bPowerOff = FALSE;
 

@@ -273,7 +273,8 @@ int main(int argc, char *argv[])
 	}
 
 	int nDownloadRet = DOWNLOAD_ERRLSTARTDLOADER;
-	printf("PAC: %s\nBAUD: %d,bBackUpNv=%d\n\n", szPac,nBaudRate,bBackUpNv);
+	if(0 != strlen(szPac))
+		printf("PAC: %s\nBAUD: %d,bBackUpNv=%d\n\n", szPac,nBaudRate,bBackUpNv);
 
 
 	//stop modemmanager services
