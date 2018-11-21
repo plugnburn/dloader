@@ -23,7 +23,7 @@ int CTest::OnChannelData(void* lpData,
 {
     if(ulDataSize!= 0 && lpData != NULL)
     {
-        printf((char*)lpData);
+        printf("%s", (char*)lpData);
     }
 
     return 0;
